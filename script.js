@@ -4,7 +4,7 @@ var clockInConsole = {
             hours = date.getHours(),
             minutes = date.getMinutes(),
             seconds = date.getSeconds(),
-            currentTime = "Время: " + hours + ":" + minutes + ":" + seconds;
+            currentTime = "Время: " + this.declOfNum(hours, ['часа', 'часов', 'часов']) + " " + this.declOfNum(minutes, ['минута', 'минуты', 'минут']) + " " + this.declOfNum(seconds, ['секунда', 'секунды', 'секунд']);
         this.clearConsole();
         console.log(currentTime);
         if (seconds == 59)
@@ -13,7 +13,12 @@ var clockInConsole = {
     
     clearConsole : function() {
         console.clear();
-    }
+    },
+    
+    declOfNum : function(number, titles) {  
+    cases = [2, 0, 1, 1, 1, 2];  
+    return number + " " + titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];  
+    }  
 }
 
 var showClock = setInterval (function() {
